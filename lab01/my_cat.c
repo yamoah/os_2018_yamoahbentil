@@ -1,5 +1,6 @@
 /*yamoah bentil   my_cat */
 #include <stdio.h>
+#include <stdlib.h>
 /*
 int main(void){
 	printf("Hello");
@@ -13,8 +14,7 @@ int main(int argc, char *argv[]){
 	for(i=1; i<argc; ++i)
 		printf("%s", argv[i]);
 	printf("\n");
-}
-*/
+}*/
 int main(){
 	char c;
 	FILE *infile;
