@@ -1,21 +1,24 @@
-/*yamoah bentil   my_greg */
+/*yamoah bentil  my_grep */
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 int findPattern(char pattern[], char text[]);
 
 int main(int argc, char *argv[]){
 	char c;
-	FILE *infile;
+	/*FILE *infile; char cc = patt; */
 	char *patt = argv[1];
-	infile = fopen(argv[2],"r");
+	
+	FILE *infile = fopen(argv[2],"r");
 	c = fgetc(infile);
 	if (infile == NULL){
-		printf("Cannot open file \n"); 
+		printf("Cannot open file \n");
 		return 1;/*exit(0);*/
     }
 	while (c !=EOF){
-		findPattern(patt,c);
+		/*printf("%c", c);*/
+		findPattern(patt, "dsfjh");
 		c = fgetc(infile);
 	}
 	fclose(infile);
@@ -23,7 +26,7 @@ int main(int argc, char *argv[]){
 }
 
 int findPattern(char pattern[], char text[]){
-	int i, j, count, lenPattern, lenText =0;
+	int i, j, count, lenPattern, lenText = -1;
 	lenPattern = strlen(pattern);
 	lenText = strlen(text);
 	if(lenPattern > lenText)
@@ -35,8 +38,10 @@ int findPattern(char pattern[], char text[]){
 				if(pattern[j]=text[j+i])
 					count++;
 			}
-			if(count==lenPattern)
+			if(count==lenPattern){
 				printf(text);
+				i=lenText-lenPattern;
+			}	
 		}
 	}
 	return 0;
