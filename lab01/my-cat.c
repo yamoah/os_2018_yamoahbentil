@@ -4,17 +4,20 @@
 
 int main(int argc, char *argv[]){
 	char c;
+	char myLine[255];
+	
 	FILE *infile;
 	infile = fopen(argv[1],"r");
-	c = fgetc(infile);
+	
 	if (infile == NULL){
 		printf("Cannot open file \n");
 		exit(0);
     }
-	while (c !=EOF){
-		printf("%c", c);
-		c = fgetc(infile);
+    
+    while(fgets(myLine, 255, infile)){
+    	printf(myLine);
 	}
+	
 	fclose(infile);
 	return 0;
 }
