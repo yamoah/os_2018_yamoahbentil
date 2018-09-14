@@ -6,20 +6,21 @@
 int findPattern(char pattern[], char text[]);
 
 int main(int argc, char *argv[]){
-	char c;
+	char* c;
+	int cc;
 	/*FILE *infile; char cc = patt; */
 	char *patt = argv[1];
 	
 	FILE *infile = fopen(argv[2],"r");
-	c = fgetc(infile);
+	c,cc = fgetc(infile);
 	if (infile == NULL){
 		printf("Cannot open file \n");
-		return 1;/*exit(0);*/
+		exit(0);
     }
-	while (c !=EOF){
+	while (cc !=EOF){
 		/*printf("%c", c);*/
-		findPattern(patt, "dsfjh");
-		c = fgetc(infile);
+		findPattern(patt, c);
+		c,cc = fgetc(infile);
 	}
 	fclose(infile);
 	return 0;
@@ -40,7 +41,7 @@ int findPattern(char pattern[], char text[]){
 			}
 			if(count==lenPattern){
 				printf(text);
-				i=lenText-lenPattern;
+				i=(lenText-lenPattern)+1;
 			}	
 		}
 	}
