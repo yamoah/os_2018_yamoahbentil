@@ -52,18 +52,18 @@ int wish_help(char **args){
   return 1;
 }
 int wish_path(char **args){
-    char strone[sizeof(args)+4];
     int one = sizeof(args);
     printf("%d\n",one);
+    int two = strlen(args[1]);
+    printf("%d\n",two);
+    /*char strone[4 + strlen(args[1])];
+    strcpy(strone, "/usr");
+    strcat(strone, args[1]);
     printf("The path function\n");
-    strcpy(strone, args[1]);
-    printf("%s\n", strone);
-    char* prefix =  "/usr";
-    //strcat(strone ,prefix);
-    printf("%s\n", strone);
+    printf("%s\n", strone);*/
 
     return 1;
-}//access("/bin/ls", X_OK).....access("/usr/bin/ls", X_OK)..
+}//access("/bin/ls", X_OK).....access("/usr/bin/ls", X_OK)..perror("wish> ");
 
 
 //.....................................
