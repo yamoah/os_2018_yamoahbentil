@@ -1,6 +1,5 @@
 dir
 cd test
 dir
-ls
 cd ..
 dir

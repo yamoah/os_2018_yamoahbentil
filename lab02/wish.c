@@ -52,18 +52,38 @@ int wish_help(char **args){
   return 1;
 }
 int wish_path(char **args){
-    int one = sizeof(args);
-    printf("%d\n",one);
-    int two = strlen(args[1]);
-    printf("%d\n",two);
-    /*char strone[4 + strlen(args[1])];
-    strcpy(strone, "/usr");
-    strcat(strone, args[1]);
-    printf("The path function\n");
-    printf("%s\n", strone);*/
+
+    if(args[1]!=NULL){
+        char strone[4 + strlen(args[1])];
+        strcpy(strone, "/usr");
+        strcat(strone, args[1]);
+        if(access(strone, X_OK)!=0){printf("arg 1 path\n");}
+        if(access(args[1], X_OK)!=0){printf("arg 1 no usr\n");}
+    }
+    if(args[2]!=NULL){
+        char strone[4 + strlen(args[1])+strlen(args[2])];
+        char strone2[strlen(args[1])+strlen(args[2])];
+        strcpy(strone, "/usr");
+        strcpy(strone2, args[1]);
+        strcat(strone, args[1]);
+        strcat(strone2, args[2]);
+        strcat(strone, args[2]);
+        if(access(strone, X_OK)==0){
+            printf("arg 2 path\n");
+            perror("wish> ");
+        }
+        if(access(strone2, X_OK)==0){
+            printf("arg 2 path no usr\n");
+            perror("wish> ");
+        }
+    }
+    else{
+        access("", X_OK);
+        //perror("wish> ");
+    }
 
     return 1;
-}//access("/bin/ls", X_OK).....access("/usr/bin/ls", X_OK)..perror("wish> ");
+}
 
 
 //.....................................
