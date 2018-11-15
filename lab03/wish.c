@@ -41,7 +41,7 @@ int wish_Redirection(char **args){
     //
 
     //enter data here
-    fgets(myLine, DATA_SIZE, infile);
+    fgets(data, DATA_SIZE, stdin);
     
     //write data here
     fputs(data, filepointer);
@@ -204,7 +204,7 @@ int wish_execute(char **args)
   }
 
   for (i = 0; i < wish_num_builtins(); i++) {
-    if(strcmp(args[i],">")==0){
+    if(strcmp(args[0],">")==0){
         printf("it acknowledges the > sign");
     }
     if (strcmp(args[0], builtin_str[i]) == 0) {
