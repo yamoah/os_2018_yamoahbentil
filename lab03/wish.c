@@ -6,6 +6,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <errno.h>
+#include <fcntl.h>
 #include <sys/wait.h>
 #define MAX 15
 #define DATA_SIZE 255
@@ -32,20 +33,20 @@ int wish_num_builtins() {
 //.....................................
 int wish_Redirection(char **args){
     char data[DATA_SIZE];
-    FILE * filepointer = NULL;
-    filepointer = fopen("output.txt","w");
-    if(filepointer==NULL){
-        printf("Error creating file");
-        exit(EXIT_FAILURE);
-    }
+    
+    close(STDOUT_FILENO);
+    open("output.txt", O_CREAT|O_WRONLY|O_TRUNC, S_IRWXU);
     //
 
     //enter data here
     fgets(data, DATA_SIZE, stdin);
     
-    //write data here
-    fputs(data, filepointer);
-    fclose(filepointer);
+    // now exec "wc"...
+    char *myargs[3];
+    myargs[0] = strdup("wc"); // program: "wc" (word count)
+    myargs[1] = strdup("output.txt"); // argument: file to count
+    myargs[2] = NULL; // marks end of array
+    execvp(myargs[0], myargs); // runs word count
     printf("done");
     return 1;
 }
@@ -70,7 +71,6 @@ int wish_help(char **args){
   for (i = 0; i < wish_num_builtins(); i++) {
     printf("->%s\n", builtin_str[i]);
   }
-
   return 1;
 }
 int wish_path(char **args){
@@ -103,7 +103,6 @@ int wish_path(char **args){
         access("", X_OK);
         //perror("wish> ");
     }
-
     return 1;
 }
 
